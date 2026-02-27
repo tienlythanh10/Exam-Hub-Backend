@@ -9,7 +9,9 @@ import { User } from './user.entity';
 
 export enum TokenType {
   VERIFY_ACCOUNT = 'verify-account',
+  OTP = 'otp',
   RESET_PASSWORD = 'reset-password',
+  REFRESH_TOKEN = 'refresh-token'
 }
 
 @Entity('tokens')

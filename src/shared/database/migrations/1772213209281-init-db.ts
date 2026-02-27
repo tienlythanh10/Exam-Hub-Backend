@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class InitDb1770918072458 implements MigrationInterface {
-    name = 'InitDb1770918072458'
+export class InitDb1772213209281 implements MigrationInterface {
+    name = 'InitDb1772213209281'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.query(`CREATE TABLE \`tokens\` (\`id\` varchar(36) NOT NULL, \`token\` varchar(255) NOT NULL, \`created_at\` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, \`expired_at\` datetime NOT NULL, \`type\` enum ('verify-account', 'reset-password') NOT NULL, \`used_at\` datetime NULL, \`is_revoked\` tinyint NOT NULL DEFAULT 0, \`user_id\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
+        await queryRunner.query(`CREATE TABLE \`tokens\` (\`id\` varchar(36) NOT NULL, \`token\` varchar(255) NOT NULL, \`created_at\` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, \`expired_at\` datetime NOT NULL, \`type\` enum ('verify-account', 'otp', 'reset-password', 'refresh-token') NOT NULL, \`used_at\` datetime NULL, \`is_revoked\` tinyint NOT NULL DEFAULT 0, \`user_id\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`course_teachers\` (\`id\` varchar(36) NOT NULL, \`teacher_id\` varchar(255) NOT NULL, \`course_id\` varchar(255) NOT NULL, \`joined_at\` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, \`is_owner\` tinyint NOT NULL, UNIQUE INDEX \`UQ_course_teachers_teacher_id_course_id\` (\`teacher_id\`, \`course_id\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`exam_files\` (\`id\` varchar(36) NOT NULL, \`url\` varchar(255) NOT NULL, \`key\` varchar(255) NOT NULL, \`type\` enum ('question-paper', 'answer-key', 'solution-sheet') NOT NULL, \`created_at\` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP, \`updated_at\` datetime NULL, \`exam_id\` varchar(255) NOT NULL, PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
         await queryRunner.query(`CREATE TABLE \`fill_in_blank_attempt_answers\` (\`id\` varchar(36) NOT NULL, \`position\` int NOT NULL, \`answer\` varchar(255) NOT NULL, \`attempt_answer_id\` varchar(255) NOT NULL, UNIQUE INDEX \`UQ_fill_in_blank_attempt_answers_attempt_answer_id_position\` (\`attempt_answer_id\`, \`position\`), PRIMARY KEY (\`id\`)) ENGINE=InnoDB`);
